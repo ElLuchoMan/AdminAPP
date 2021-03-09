@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'sap.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_db',
+        'NAME': 'sap_db',
         'USER': 'postgres',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
