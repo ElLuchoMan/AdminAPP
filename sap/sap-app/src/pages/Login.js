@@ -24,8 +24,6 @@ export default class Login extends Component {
             <div className="Pantalla">
                 <h1>Inicio de sesión</h1>
                 <hr />
-
-
                 <div className="ContainerPrincipal">
                     <div className="ContainerSecundario">
                         <label>Email</label>
