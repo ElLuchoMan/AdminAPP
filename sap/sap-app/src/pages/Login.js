@@ -2,12 +2,16 @@ import { Component } from 'react'
 import '../css/Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
+
+const baseUrl = "http://127.0.0.1:8000/api/v1/persona/";
+const cookies = new Cookies();
 
 export default class Login extends Component {
     state = {
         form: {
-            email: ' ',
-            password: ' ',
+            username: '',
+            password: '',
         }
     }
     handleChange = async e => {
@@ -17,7 +21,28 @@ export default class Login extends Component {
                 [e.target.name]: e.target.value
             }
         });
-        console.log(this.state.form)
+    }
+    iniciarSesion = async () => {
+        await axios.get(baseUrl, { params: { username: this.state.form.username, password: this.state.form.password } })
+            .then(response => {
+                return response.data;
+            })
+            .then(response => {
+                if (response.length > 0) {
+                    var respuesta = response[0];
+                    cookies.set('id', respuesta.id, { path: "/" });
+                    cookies.set('username', respuesta.username, { path: "/" });
+                    cookies.set('ingreso', respuesta.ingreso, { path: "/" });
+                    cookies.set('tiempo', respuesta.tiempo, { path: "/" });
+                    cookies.set('click', respuesta.click, { path: "/" });
+                    alert('Bienvenido ${respuesta.username}')
+                } else {
+                    alert('Username o Password Incorrectos');
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
     render() {
         return (
@@ -26,15 +51,15 @@ export default class Login extends Component {
                 <hr />
                 <div className="ContainerPrincipal">
                     <div className="ContainerSecundario">
-                        <label>Email</label>
+                        <label>Username</label>
                         <br />
-                        <input type="text" name="email" className="form-control" placeholder="Ingrese Email" onChange={this.handleChange} />
+                        <input type="text" name="username" className="form-control" placeholder="Ingrese Username" onChange={this.handleChange} />
                         <br />
                         <label>Contraseña</label>
                         <br />
                         <input type="password" name="password" className="form-control" placeholder="Ingrese Contraseña" onChange={this.handleChange} />
                         <br />
-                        <button className="btn btn-primary">Iniciar Sesión</button>
+                        <button className="btn btn-primary" onClick={() => this.iniciarSesion()}>Iniciar Sesión</button>
                     </div>
                 </div>
             </div>
