@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Login from '../pages/Login'
+import Principal from '../pages/Principal';
 import Resumen from '../pages/Resumen'
 
 
@@ -10,6 +11,7 @@ function Routes() {
       <Switch>
         <Route exact path="/" component={Login}/>
         <Route exact path="/admin" component={Resumen}/>
+        <Route exact path="/principal" component={Principal}/>
      </Switch>
    </BrowserRouter>
   );
