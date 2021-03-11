@@ -11,6 +11,8 @@ export default class Principal extends Component {
         cookies.remove('tiempo', { path: "/" });
         cookies.remove('click', { path: "/" });
     }
+
+
     render() {
         return (
             <div>
@@ -18,4 +20,5 @@ export default class Principal extends Component {
             </div>
         )
     }
+
 }
