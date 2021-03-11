@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect } from 'react';
-import '../css/Resumen.css';
+import React, { Component } from 'react';
+import '../css/Styles.css';
 import Cookies from 'universal-cookie'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core'
@@ -26,7 +26,7 @@ const config = {
     yField: 'tiempo',
     point: {
         size: 5,
-        shape: 'diamond',
+        shape: 'circle',
     },
     label: {
         style: {
@@ -48,36 +48,38 @@ export default class Resumen extends Component {
             <div className="Pantalla">
                 <h1>Resumen de personas</h1>
                 <hr />
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Id</TableCell>
-                                <TableCell>Username</TableCell>
-                                <TableCell>Ingreso</TableCell>
-                                <TableCell>Tiempo</TableCell>
-                                <TableCell>Boton 1</TableCell>
-                                <TableCell>Boton 2</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {data.map((user) => (
+                <div className="container">
+                    <TableContainer>
+                        <Table>
+                            <TableHead>
                                 <TableRow>
-                                    <TableCell>{user.id}</TableCell>
-                                    <TableCell>{user.username}</TableCell>
-                                    <TableCell>{user.ingreso}</TableCell>
-                                    <TableCell>{user.tiempo}</TableCell>
-                                    <TableCell>{user.boton1}</TableCell>
-                                    <TableCell>{user.boton2}</TableCell>
+                                    <TableCell>Id</TableCell>
+                                    <TableCell>Username</TableCell>
+                                    <TableCell>Ingreso</TableCell>
+                                    <TableCell>Tiempo</TableCell>
+                                    <TableCell>Boton 1</TableCell>
+                                    <TableCell>Boton 2</TableCell>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <hr/>
+                            </TableHead>
+                            <TableBody>
+                                {data.map((user) => (
+                                    <TableRow>
+                                        <TableCell>{user.id}</TableCell>
+                                        <TableCell>{user.username}</TableCell>
+                                        <TableCell>{user.ingreso}</TableCell>
+                                        <TableCell>{user.tiempo}</TableCell>
+                                        <TableCell>{user.boton1}</TableCell>
+                                        <TableCell>{user.boton2}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>
+                <hr />
                 <h1>Gráfica</h1>
-                <hr/>
-                <div> 
+                <hr />
+                <div className="container">
                     <Line {...config} />
                 </div>
 
