@@ -1,34 +1,48 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import '../css/Resumen.css';
-// import Cookies from 'universal-cookie'
+import Cookies from 'universal-cookie'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core'
+import axios from 'axios'
+import { Line } from '@ant-design/charts';
 
 
-// const cookies = new Cookies();
-// const baseUrl = "http://127.0.0.1:8000/api/v1/persona/";
-const persona = [
-    { id: 1, username: "bryan", ingreso: null, tiempo: 0, click: null },
-    { id: 2, username: "test1", ingreso: null, tiempo: 0, click: null },
-    { id: 3, username: "test2", ingreso: null, tiempo: 0, click: null },
+const cookies = new Cookies();
+const baseUrl = "http://127.0.0.1:8000/api/v1/persona/";
+const data = [
+    { id: 1, username: "bryan", ingreso: null, tiempo: 0, boton1: null, boton2: null },
+    { id: 2, username: "test1", ingreso: null, tiempo: 100, boton1: null, boton2: null },
+    { id: 3, username: "test2", ingreso: null, tiempo: 150, boton1: null, boton2: null },
 ];
-
-// const paginacion = [{
-//     rowsPerPageText: 'Filas por página',
-//     rangeSeparator: 'de',
-//     selectAllRowsItem: true,
-//     selectAllRowsItemText: 'Todos',
-
-// }];
+const peticionApi = async () => {
+    await axios.get('baseUrl').then(response => {
+        console.log(response.data);
+    })
+}
+const config = {
+    data,
+    height: 400,
+    xField: 'username',
+    yField: 'tiempo',
+    point: {
+        size: 5,
+        shape: 'diamond',
+    },
+    label: {
+        style: {
+            fill: '#aaa',
+        },
+    },
+};
 
 export default class Resumen extends Component {
-    // cerrarSesion = () => {
-    // cookies.remove('id', { path: "/" });
-    // cookies.remove('username', { path: "/" });
-    // cookies.remove('ingreso', { path: "/" });
-    // cookies.remove('tiempo', { path: "/" });
-    // cookies.remove('click', { path: "/" });
-    // }
+    cerrarSesion = () => {
+        cookies.remove('id', { path: "/" });
+        cookies.remove('username', { path: "/" });
+        cookies.remove('ingreso', { path: "/" });
+        cookies.remove('tiempo', { path: "/" });
+        cookies.remove('click', { path: "/" });
+    }
     render() {
         return (
             <div className="Pantalla">
@@ -42,24 +56,30 @@ export default class Resumen extends Component {
                                 <TableCell>Username</TableCell>
                                 <TableCell>Ingreso</TableCell>
                                 <TableCell>Tiempo</TableCell>
-                                <TableCell>Click</TableCell>
+                                <TableCell>Boton 1</TableCell>
+                                <TableCell>Boton 2</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {persona.map((user) => (
+                            {data.map((user) => (
                                 <TableRow>
                                     <TableCell>{user.id}</TableCell>
                                     <TableCell>{user.username}</TableCell>
                                     <TableCell>{user.ingreso}</TableCell>
                                     <TableCell>{user.tiempo}</TableCell>
-                                    <TableCell>{user.click}</TableCell>
+                                    <TableCell>{user.boton1}</TableCell>
+                                    <TableCell>{user.boton2}</TableCell>
                                 </TableRow>
                             ))}
-
                         </TableBody>
-
                     </Table>
                 </TableContainer>
+                <hr/>
+                <h1>Gráfica</h1>
+                <hr/>
+                <div> 
+                    <Line {...config} />
+                </div>
 
             </div>
         )
