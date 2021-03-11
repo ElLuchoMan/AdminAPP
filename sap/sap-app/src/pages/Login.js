@@ -21,29 +21,30 @@ export default class Login extends Component {
                 [e.target.name]: e.target.value
             }
         });
+    
     }
     iniciarSesion = async () => {
         await axios.get(baseUrl, { params: { username: this.state.form.username, password: this.state.form.password } })
             .then(response => {
-                return response.data;
+                console.log (response.data);
             })
-            .then(response => {
-                if (response.length > 0) {
-                    var respuesta = response[0];
-                    cookies.set('id', respuesta.id, { path: "/" });
-                    cookies.set('username', respuesta.username, { path: "/" });
-                    cookies.set('ingreso', respuesta.ingreso, { path: "/" });
-                    cookies.set('tiempo', respuesta.tiempo, { path: "/" });
-                    cookies.set('click', respuesta.click, { path: "/" });
-                    alert('Bienvenido ${respuesta.username}');
-                    window.location.href="./Resumen";
-                } else {
-                    alert('Username o Password Incorrectos');
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            })
+            // .then(response => {
+            //     if (response.length > 0) {
+            //         var respuesta = response[0];
+            //         cookies.set('id', respuesta.id, { path: "/" });
+            //         cookies.set('username', respuesta.username, { path: "/" });
+            //         cookies.set('ingreso', respuesta.ingreso, { path: "/" });
+            //         cookies.set('tiempo', respuesta.tiempo, { path: "/" });
+            //         cookies.set('click', respuesta.click, { path: "/" });
+            //         alert('Bienvenido ${respuesta.username}');
+            //         window.location.href="./Resumen";
+            //     } else {
+            //         alert('Username o Password Incorrectos');
+            //     }
+            // })
+            // .catch(error => {
+            //     console.log(error);
+            // })
     }
     render() {
         return (
