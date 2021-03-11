@@ -4,18 +4,18 @@ import Cookies from 'universal-cookie'
 const cookies = new Cookies();
 
 export default class Resumen extends Component {
-    cerrarSesion=()=> {
-        cookies.remove('id', respuesta.id, { path: "/" });
-        cookies.remove('username', respuesta.username, { path: "/" });
-        cookies.remove('ingreso', respuesta.ingreso, { path: "/" });
-        cookies.remove('tiempo', respuesta.tiempo, { path: "/" });
-        cookies.remove('click', respuesta.click, { path: "/" });
+    cerrarSesion = () => {
+        cookies.remove('id', { path: "/" });
+        cookies.remove('username', { path: "/" });
+        cookies.remove('ingreso', { path: "/" });
+        cookies.remove('tiempo', { path: "/" });
+        cookies.remove('click', { path: "/" });
     }
 
     render() {
         return (
             <div>
-                
+
             </div>
         )
     }
