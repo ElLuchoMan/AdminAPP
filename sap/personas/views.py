@@ -1,18 +1,16 @@
-from rest_framework import generics
+from django.views import View
 from .models import Persona
-from .serializers import PersonaSerializer
-from django.http import Http404, JsonResponse
+from django.http import JsonResponse
+from django.forms import model_to_dict
 
-
-class PersonaList(generics.ListCreateAPIView):
-    queryset = Persona.objects.all()
-    serializer_class = PersonaSerializer
-
-    def getPersona(request):
-        users = Persona.objects.all()
-        data = list(users.values("id", "username", "password","tiempo","click","ingreso"))
-        return JsonResponse(data, safe=False)
-
-    def getPersonaDetail(request, param):
-        data = Persona.objects.filter(id=param)
-        return JsonResponse(list(data.values("id", "username", "password","tiempo","click","ingreso")), safe=False)
+class PersonaListView(View):
+    def get(self,request):
+        if('name' in request.GET):
+            PList= Persona.objects.filter(name=request.GET['name'])
+        else:
+            PList= Persona.objects.all()
+        return JsonResponse(list(PList.values()), safe=False)
+class PersonaDetailView(View):
+    def get(self, request,name):
+        persona = Persona.objects.get(name=name)
+        return JsonResponse(model_to_dict(persona))

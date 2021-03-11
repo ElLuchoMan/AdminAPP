@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import PersonaList
-
+from .views import PersonaListView, PersonaDetailView
 
 urlpatterns=[
-  path('persona/',PersonaList.as_view(),name='persona_list')
+  path('persona/',PersonaListView.as_view(),name='persona_list'),
+  path('persona/<str:name>/', PersonaDetailView.as_view(),name='persona'),
 ]
