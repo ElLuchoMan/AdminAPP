@@ -35,7 +35,8 @@ export default class Login extends Component {
                     cookies.set('ingreso', respuesta.ingreso, { path: "/" });
                     cookies.set('tiempo', respuesta.tiempo, { path: "/" });
                     cookies.set('click', respuesta.click, { path: "/" });
-                    alert('Bienvenido ${respuesta.username}')
+                    alert('Bienvenido ${respuesta.username}');
+                    window.location.href="./Resumen";
                 } else {
                     alert('Username o Password Incorrectos');
                 }
