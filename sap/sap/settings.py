@@ -39,6 +39,14 @@ INSTALLED_APPS = [
     'personas',
     'page',
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTIFICATION_CLASSES':[
+        'rest_framework.authentification.TokenAuthentification'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+   }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,7 +64,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR,'sap-app/build')
+            os.path.join(BASE_DIR, 'sap-app/build')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -117,6 +125,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR,'sap-app/build/static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'sap-app/build/static')
 ]
