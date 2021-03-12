@@ -11,8 +11,11 @@ export default class Principal extends Component {
         cookies.remove('name', { path: "/" });
         window.location.href = "./";
     }
-
-
+    componentDidMount() {
+        if (cookies.get('admin')) {
+            window.location.href = "./";
+        }
+    }
     render() {
         return (
             <div className="Pantalla">

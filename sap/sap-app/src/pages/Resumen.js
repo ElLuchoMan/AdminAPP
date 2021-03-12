@@ -39,7 +39,13 @@ export default class Resumen extends Component {
     cerrarSesion = () => {
         cookies.remove('id', { path: "/" });
         cookies.remove('name', { path: "/" });
+        cookies.remove('admin', { path: "/" });
         window.location.href = "./";
+    }
+    componentDidMount() {
+        if (!cookies.get('admin')) {
+            window.location.href = "./";
+        }
     }
     render() {
         return (

@@ -34,6 +34,7 @@ class Login extends Component {
                     cookies.set('name', respuesta.name, { path: "/" });
                     alert(`Bienvenido ${respuesta.name}`);
                     if (respuesta.admin === true) {
+                        cookies.set('admin', respuesta.admin, { path: "/" });
                         window.location.href = "./resumen";
                     } else {
                         window.location.href = "./principal";
@@ -45,6 +46,14 @@ class Login extends Component {
             .catch(error => {
                 console.log(error);
             })
+    }
+    componentDidMount() {
+        if (cookies.get('admin')) {
+            window.location.href = "./resumen";
+        }
+        else if (cookies.get('user') && !cookies.get('admin')) {
+            window.location.href = "./principal";
+        }
     }
 
     render() {
