@@ -9,19 +9,8 @@ import { Line } from '@ant-design/charts';
 
 const cookies = new Cookies();
 const baseUrl = "http://127.0.0.1:8000/api/persona/";
-// const data = [
-//     { id: 1, username: "bryan", ingreso: null, tiempo: 0, boton1: null, boton2: null },
-//     { id: 2, username: "test1", ingreso: null, tiempo: 100, boton1: null, boton2: null },
-//     { id: 3, username: "test2", ingreso: null, tiempo: 150, boton1: null, boton2: null },
-// ];
-const data = [];
-const peticionApi = async () => {
-    await axios.get(baseUrl).then(response => {
-        this.data = response.data;
-    })
-}
 const config = {
-    data,
+    persona,
     height: 400,
     xField: 'username',
     yField: 'tiempo',
@@ -35,21 +24,35 @@ const config = {
         },
     },
 };
+
 export default class Resumen extends Component {
+    state = {
+        persona: [],
+    }
     cerrarSesion = () => {
         cookies.remove('id', { path: "/" });
         cookies.remove('name', { path: "/" });
         cookies.remove('admin', { path: "/" });
         window.location.href = "./";
     }
-    componentDidMount() {
+    async componentDidMount() {
         if (!cookies.get('admin')) {
             window.location.href = "./";
         }
+        await this.fetchPersonas()
+    }
+    fetchPersonas = async () => {
+        let res = await fetch(baseUrl)
+        let persona = await res.json()
+        this.setState({
+            persona
+        })
+        console.log(persona);
     }
     render() {
+
         return (
-            <div className="Pantalla">
+            <div className="Pantalla" >
                 <h1>Resumen de personas<button className="btn btn-primary float-right" onClick={() => this.cerrarSesion()}> Salir </button></h1>
                 <hr />
                 <div className="container">
@@ -66,10 +69,10 @@ export default class Resumen extends Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {data.map((user) => (
+                                {this.state.persona.map((user) => (
                                     <TableRow>
                                         <TableCell>{user.id}</TableCell>
-                                        <TableCell>{user.username}</TableCell>
+                                        <TableCell>{user.name}</TableCell>
                                         <TableCell>{user.ingreso}</TableCell>
                                         <TableCell>{user.tiempo}</TableCell>
                                         <TableCell>{user.boton1}</TableCell>
@@ -83,9 +86,9 @@ export default class Resumen extends Component {
                 <hr />
                 <h1>Gráfica</h1>
                 <hr />
-                <div className="container">
+                 <div className="container">
                     <Line {...config} />
-                </div>
+                </div> 
 
             </div>
         )
