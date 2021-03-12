@@ -10,6 +10,8 @@ export default class Principal extends Component {
     state = {
         page: [],
         persona: [],
+        countb1: 1,
+        countb2: 1,
 
     }
     cerrarSesion = () => {
@@ -39,32 +41,30 @@ export default class Principal extends Component {
             persona
         })
     }
-    contarClicks = (boton) => {
-        var cboton1 = this.state.persona.boton1;
+    clicksBoton1 = () => {
+        this.setState({ countb1: this.state.countb1 + 1 })
+        alert(`Presionó el botón uno la siguiente cantidad de veces: ${this.state.countb1}`);
+        console.log(this.state.countb1);
 
-        if (boton === "boton1") {
-            this.setState({
-                cboton1: this.state.cboton1 + 1
-            });
-            alert('Boton1');
-            console.log(this.state.cboton1);
-        } else if (boton === "boton2") {
-
-        }
+    }
+    clicksBoton2 = () => {
+        this.setState({ countb2: this.state.countb2 + 1 })
+        alert(`Presionó el botón dos la siguiente cantidad de veces: ${this.state.countb2}`);
+        console.log(this.state.countb2);
     }
 
     render() {
         return (
             <div className="Pantalla">
-                <h1>Bienvenido <button className="btn btn-primary float-right" onClick={() => this.cerrarSesion()}> Salir </button></h1>
+                <h1>Hola {cookies.get('name')} <button className="btn btn-primary float-right" onClick={() => this.cerrarSesion()}> Salir </button></h1>
                 <hr />
                 <div className="container">
                     {this.state.page.map((pag) => (
                         <div className="row">
-                            <div className="col-md-3">
+                            <div className="col-md-3 float-left">
                                 <img className="imagen" alt="Logo" src={pag.logo} />
                             </div>
-                            <div className="col-md-9">
+                            <div className="col-md-8 ml-3 float-right">
                                 <h3>{pag.titulo}</h3>
                                 <hr />
                                 <h5>{pag.descripcion}</h5>
@@ -72,13 +72,11 @@ export default class Principal extends Component {
                         </div>
                     ))}
 
-
-
                 </div>
                 <div className="container">
                     <div className="col-md-8 float-right">
-                        <button className="btn btn-primary float-left" onClick={() => this.contarClicks("boton1")}>Boton 1</button>
-                        <button className="btn btn-primary float-right" onClick={() => this.contarClicks("boton2")}>Boton2</button>
+                        <button className="btn btn-primary float-left" onClick={() => this.clicksBoton1()}>Boton 1</button>
+                        <button className="btn btn-primary float-none" onClick={() => this.clicksBoton2()}>Boton2</button>
                     </div>
                 </div>
             </div>

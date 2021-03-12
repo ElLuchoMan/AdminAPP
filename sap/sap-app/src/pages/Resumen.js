@@ -69,6 +69,7 @@ export default class Resumen extends Component {
                 </div>
                 <hr />
                 <h1>Gráfica</h1>
+                <h5>Persona vs Tiempo</h5>
                 <hr />
                 <div className="container">
                     <XYPlot className="xyPlot" xType="ordinal" width={window.innerWidth * 0.8} height={500}>
