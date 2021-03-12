@@ -12,7 +12,7 @@ export default class Principal extends Component {
         window.location.href = "./";
     }
     componentDidMount() {
-        if (cookies.get('admin')) {
+        if (cookies.get('admin') || !cookies.get('name')) {
             window.location.href = "./";
         }
     }

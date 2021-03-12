@@ -51,7 +51,7 @@ class Login extends Component {
         if (cookies.get('admin')) {
             window.location.href = "./resumen";
         }
-        else if (cookies.get('user') && !cookies.get('admin')) {
+        else if (cookies.get('name') && !cookies.get('admin')) {
             window.location.href = "./principal";
         }
     }
