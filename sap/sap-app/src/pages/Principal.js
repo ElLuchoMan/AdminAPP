@@ -3,22 +3,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies();
-const baseUrl = "http://127.0.0.1:8000/api/v1/page/";
+const baseUrl = "http://127.0.0.1:8000/api/page/";
 
 export default class Principal extends Component {
     cerrarSesion = () => {
         cookies.remove('id', { path: "/" });
-        cookies.remove('username', { path: "/" });
-        cookies.remove('ingreso', { path: "/" });
-        cookies.remove('tiempo', { path: "/" });
-        cookies.remove('click', { path: "/" });
+        cookies.remove('name', { path: "/" });
+        window.location.href = "./";
     }
 
 
     render() {
         return (
             <div className="Pantalla">
-                <h1>Bienvenido</h1>
+                <h1>Bienvenido <button className="btn btn-primary float-right" onClick={() => this.cerrarSesion()}> Salir </button></h1>
                 <hr />
                 <div className="container">
                     <div className="row">

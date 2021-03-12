@@ -17,7 +17,7 @@ const baseUrl = "http://127.0.0.1:8000/api/persona/";
 const data = [];
 const peticionApi = async () => {
     await axios.get(baseUrl).then(response => {
-        this.data=response.data;
+        this.data = response.data;
     })
 }
 const config = {
@@ -35,19 +35,16 @@ const config = {
         },
     },
 };
-
 export default class Resumen extends Component {
     cerrarSesion = () => {
         cookies.remove('id', { path: "/" });
-        cookies.remove('username', { path: "/" });
-        cookies.remove('ingreso', { path: "/" });
-        cookies.remove('tiempo', { path: "/" });
-        cookies.remove('click', { path: "/" });
+        cookies.remove('name', { path: "/" });
+        window.location.href = "./";
     }
     render() {
         return (
             <div className="Pantalla">
-                <h1>Resumen de personas</h1>
+                <h1>Resumen de personas<button className="btn btn-primary float-right" onClick={() => this.cerrarSesion()}> Salir </button></h1>
                 <hr />
                 <div className="container">
                     <TableContainer>
