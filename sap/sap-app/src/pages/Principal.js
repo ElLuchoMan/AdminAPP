@@ -23,7 +23,7 @@ export default class Principal extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-3">
-                            <img className="imagen" src={'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Escudo_UD.svg/1200px-Escudo_UD.svg.png'} />
+                            <img className="imagen" alt="Logo" src={'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Escudo_UD.svg/1200px-Escudo_UD.svg.png'} />
                         </div>
                         <div className="col-md-9">
                             <h3>Titulo</h3>

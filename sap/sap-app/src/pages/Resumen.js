@@ -9,14 +9,15 @@ import { Line } from '@ant-design/charts';
 
 const cookies = new Cookies();
 const baseUrl = "http://127.0.0.1:8000/api/persona/";
-const data = [
-    { id: 1, username: "bryan", ingreso: null, tiempo: 0, boton1: null, boton2: null },
-    { id: 2, username: "test1", ingreso: null, tiempo: 100, boton1: null, boton2: null },
-    { id: 3, username: "test2", ingreso: null, tiempo: 150, boton1: null, boton2: null },
-];
+// const data = [
+//     { id: 1, username: "bryan", ingreso: null, tiempo: 0, boton1: null, boton2: null },
+//     { id: 2, username: "test1", ingreso: null, tiempo: 100, boton1: null, boton2: null },
+//     { id: 3, username: "test2", ingreso: null, tiempo: 150, boton1: null, boton2: null },
+// ];
+const data = [];
 const peticionApi = async () => {
-    await axios.get('baseUrl').then(response => {
-        console.log(response.data);
+    await axios.get(baseUrl).then(response => {
+        this.data=response.data;
     })
 }
 const config = {

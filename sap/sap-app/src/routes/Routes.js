@@ -3,8 +3,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Login from '../pages/Login'
 import Principal from '../pages/Principal';
 import Resumen from '../pages/Resumen'
-
-
 function Routes() {
   return (
     <BrowserRouter>

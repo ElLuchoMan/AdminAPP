@@ -6,9 +6,9 @@ from django.forms import model_to_dict
 class PersonaListView(View):
     def get(self,request):
         if('name' in request.GET):
-            PList= Persona.objects.filter(name=request.GET['name'])
+            PList= Persona.objects.filter(name=request.GET['name'], password=request.GET['password'])
         else:
-            PList= Persona.objects.all()
+            return
         return JsonResponse(list(PList.values()), safe=False)
 class PersonaDetailView(View):
     def get(self, request,name):
