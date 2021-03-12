@@ -14,3 +14,4 @@ class PersonaDetailView(View):
     def get(self, request,name):
         persona = Persona.objects.get(name=name)
         return JsonResponse(model_to_dict(persona))
+

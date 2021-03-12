@@ -38,17 +38,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'personas',
-    'rest_framework.authtoken',
-    'page',
+     'page',
 ]
-#REST_FRAMEWORK = {
- #   'DEFAULT_AUTHENTIFICATION_CLASSES':[
-  #      'rest_framework.authentification.TokenAuthentification'
-   # ],
-    #'DEFAULT_PERMISSION_CLASSES': [
-     #   'rest_framework.permissions.IsAuthenticated',
-    #],
-   #}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
