@@ -3,7 +3,8 @@ import '../css/Styles.css';
 import Cookies from 'universal-cookie'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core'
-
+import { XYPlot, XAxis, YAxis, VerticalGridLines, HorizontalGridLines, VerticalBarSeries } from 'react-vis';
+import 'react-vis/dist/style.css'
 
 const cookies = new Cookies();
 const baseUrl = "http://127.0.0.1:8000/api/persona/";
@@ -70,9 +71,19 @@ export default class Resumen extends Component {
                 <h1>Gráfica</h1>
                 <hr />
                 <div className="container">
-                  
-                </div>
+                    <XYPlot className="xyPlot" xType="ordinal" width={window.innerWidth * 0.8} height={500}>
+                        <VerticalGridLines />
+                        <HorizontalGridLines />
+                        <XAxis />
+                        <YAxis />
+                        {this.state.persona.map((user) =>
+                            <VerticalBarSeries color="#f00" data={[
+                                { x: user.name, y: user.tiempo },
+                            ]} />
+                        )}
 
+                    </XYPlot>
+                </div>
             </div>
         )
     }
