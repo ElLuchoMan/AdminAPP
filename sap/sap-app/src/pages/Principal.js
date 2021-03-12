@@ -6,15 +6,27 @@ const cookies = new Cookies();
 const baseUrl = "http://127.0.0.1:8000/api/page/";
 
 export default class Principal extends Component {
+    state = {
+        page: [],
+    }
     cerrarSesion = () => {
         cookies.remove('id', { path: "/" });
         cookies.remove('name', { path: "/" });
         window.location.href = "./";
     }
-    componentDidMount() {
+    async componentDidMount() {
         if (cookies.get('admin') || !cookies.get('name')) {
             window.location.href = "./";
         }
+        await this.fetchPage()
+    }
+    fetchPage = async () => {
+        let res = await fetch(baseUrl)
+        let page = await res.json()
+        this.setState({
+            page
+        })
+        console.log(page);
     }
     render() {
         return (
@@ -22,16 +34,23 @@ export default class Principal extends Component {
                 <h1>Bienvenido <button className="btn btn-primary float-right" onClick={() => this.cerrarSesion()}> Salir </button></h1>
                 <hr />
                 <div className="container">
-                    <div className="row">
-                        <div className="col-md-3">
-                            <img className="imagen" alt="Logo" src={'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Escudo_UD.svg/1200px-Escudo_UD.svg.png'} />
+
+
+                    {this.state.page.map((pag) => (
+                        <div className="row">
+                            <div className="col-md-3">
+                                <img className="imagen" alt="Logo" src={pag.logo} />
+                            </div>
+                            <div className="col-md-9">
+                                <h3>{pag.titulo}</h3>
+                                <hr />
+                                <h5>{pag.descripcion}</h5>
+                            </div>
                         </div>
-                        <div className="col-md-9">
-                            <h3>Titulo</h3>
-                            <hr />
-                            <h5>Descripcion</h5>
-                        </div>
-                    </div>
+                    ))}
+
+
+
                 </div>
                 <div className="container">
                     <div className="col-md-8 float-right">

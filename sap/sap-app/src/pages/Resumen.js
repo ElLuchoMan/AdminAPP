@@ -3,27 +3,10 @@ import '../css/Styles.css';
 import Cookies from 'universal-cookie'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core'
-import axios from 'axios'
-import { Line } from '@ant-design/charts';
 
 
 const cookies = new Cookies();
 const baseUrl = "http://127.0.0.1:8000/api/persona/";
-const config = {
-    persona,
-    height: 400,
-    xField: 'username',
-    yField: 'tiempo',
-    point: {
-        size: 5,
-        shape: 'circle',
-    },
-    label: {
-        style: {
-            fill: '#aaa',
-        },
-    },
-};
 
 export default class Resumen extends Component {
     state = {
@@ -86,9 +69,9 @@ export default class Resumen extends Component {
                 <hr />
                 <h1>Gráfica</h1>
                 <hr />
-                 <div className="container">
-                    <Line {...config} />
-                </div> 
+                <div className="container">
+                  
+                </div>
 
             </div>
         )
