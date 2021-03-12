@@ -3,7 +3,7 @@ import '../css/Styles.css';
 import Cookies from 'universal-cookie'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core'
-import { XYPlot, XAxis, YAxis, VerticalGridLines, HorizontalGridLines, VerticalBarSeries } from 'react-vis';
+import { XYPlot, XAxis, YAxis, VerticalGridLines, HorizontalGridLines, VerticalBarSeries, LineSeriesCanvas, LineSeries} from 'react-vis';
 import 'react-vis/dist/style.css'
 
 const cookies = new Cookies();
@@ -46,7 +46,6 @@ export default class Resumen extends Component {
                                 <TableRow>
                                     <TableCell>Id</TableCell>
                                     <TableCell>Username</TableCell>
-                                    <TableCell>Ingreso</TableCell>
                                     <TableCell>Tiempo</TableCell>
                                     <TableCell>Boton 1</TableCell>
                                     <TableCell>Boton 2</TableCell>
@@ -57,7 +56,6 @@ export default class Resumen extends Component {
                                     <TableRow>
                                         <TableCell>{user.id}</TableCell>
                                         <TableCell>{user.name}</TableCell>
-                                        <TableCell>{user.ingreso}</TableCell>
                                         <TableCell>{user.tiempo}</TableCell>
                                         <TableCell>{user.boton1}</TableCell>
                                         <TableCell>{user.boton2}</TableCell>
@@ -75,15 +73,18 @@ export default class Resumen extends Component {
                     <XYPlot className="xyPlot" xType="ordinal" width={window.innerWidth * 0.8} height={500}>
                         <VerticalGridLines />
                         <HorizontalGridLines />
-                        <XAxis />
-                        <YAxis />
+                        <XAxis title="Usuario" />
+                        <YAxis title="Tiempo Activo"/>
                         {this.state.persona.map((user) =>
-                            <VerticalBarSeries color="#f00" data={[
-                                { x: user.name, y: user.tiempo },
-                            ]} />
-                        )}
 
+                            <VerticalBarSeries  color="red"data={[
+                                    { x: user.name, y: user.tiempo },
+                                ]}
+                            />
+                        )}
                     </XYPlot>
+
+
                 </div>
             </div>
         )
